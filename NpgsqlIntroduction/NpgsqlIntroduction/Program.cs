@@ -12,7 +12,8 @@ namespace NpgsqlIntroduction
             NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=pwd;Database=rental;");
             conn.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand($"SELECT title, price, movie_id FROM movies WHERE year = {year}", conn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT title, price, movie_id FROM movies WHERE year = @year", conn);
+            cmd.Parameters.AddWithValue("@year", int.Parse(year));
             NpgsqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
