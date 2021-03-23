@@ -10,6 +10,13 @@ namespace DataMapper
         private string connection_string = "Server=127.0.0.1;User Id=postgres;Password=pwd;Database=rental;";
         private Dictionary<int, Movie> _cache = new Dictionary<int, Movie>();
 
+        public static MovieMapper Instance { get; } = new MovieMapper();
+
+        private MovieMapper()
+        {
+
+        }
+
         public Movie GetById(int id)
         {
             if (_cache.ContainsKey(id))

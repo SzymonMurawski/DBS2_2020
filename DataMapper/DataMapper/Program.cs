@@ -6,14 +6,18 @@ namespace DataMapper
     {
         static void Main(string[] args)
         {
-            MovieMapper mm = new MovieMapper();
+            MovieMapper mm = MovieMapper.Instance;
             Movie movie = mm.GetById(2);
+            movie.Title = "soimething else";
 
-            movie = mm.GetById(2);
-            Console.WriteLine(movie);
-            movie = mm.GetById(2);
-            Console.WriteLine(movie);
-            movie = mm.GetById(2);
+            MovieMapper mm2 = MovieMapper.Instance;
+            Movie movie2 = mm.GetById(2);
+
+            mm.Save(movie);
+
+            mm2.Save(movie2);
+
+            
             Console.WriteLine(movie);
 
 
