@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace DataMapper
 {
-    class MovieMapper
+    class MovieMapper: IMapper<Movie>
     {
         private string connection_string = "Server=127.0.0.1;User Id=postgres;Password=pwd;Database=rental;";
 
