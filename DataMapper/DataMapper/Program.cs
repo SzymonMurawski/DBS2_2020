@@ -6,7 +6,10 @@ namespace DataMapper
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            MovieMapper mm = new MovieMapper();
+            Movie movie = mm.GetById(2);
+            Console.WriteLine(movie);
+
         }
     }
 }
