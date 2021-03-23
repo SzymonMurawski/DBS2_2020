@@ -23,7 +23,10 @@ namespace DataMapper
                         string title = (string)reader["title"];
                         int year = (int)reader["year"];
                         double price = Convert.ToDouble(reader["price"]);
-                        return new Movie(id, title, year, price);
+
+                        var copyMapper = new CopyMapper();
+                        var copies = copyMapper.GetByMovieId(id);
+                        return new Movie(id, title, year, price, copies);
                     } else
                     {
                         return null;
