@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Npgsql;
 
 namespace DataMapper
 {
@@ -10,7 +11,25 @@ namespace DataMapper
 
         public Movie GetById(int id)
         {
-            throw new NotImplementedException();
+            using (var conn = new NpgsqlConnection(connection_string))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM movies WHERE movie_id = @id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string title = (string)reader["title"];
+                        int year = (int)reader["year"];
+                        double price = Convert.ToDouble(reader["price"]);
+                        return new Movie(id, title, year, price);
+                    } else
+                    {
+                        return null;
+                    }
+                }
+            }
         }
 
         public void Save(Movie movie)
