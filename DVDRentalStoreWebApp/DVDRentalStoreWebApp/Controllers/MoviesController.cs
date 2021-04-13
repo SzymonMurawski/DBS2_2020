@@ -55,7 +55,8 @@ namespace DVDRentalStoreWebApp.Controllers
         // GET: MoviesController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Movie movie = Movies.Find(m => m.Id == id);
+            return View(movie);
         }
 
         // POST: MoviesController/Edit/5
@@ -63,13 +64,17 @@ namespace DVDRentalStoreWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
+            Movie movie = Movies.Find(m => m.Id == id);
             try
             {
+                movie.Title = collection["Title"];
+                movie.Year = int.Parse(collection["Year"]);
+                movie.Price = double.Parse(collection["Price"]);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(movie);
             }
         }
 
