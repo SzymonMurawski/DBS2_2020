@@ -27,7 +27,8 @@ namespace DVDRentalStoreWebApp.Controllers
         // GET: MoviesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Movie movie = Movies.Find(m => m.Id == id);
+            return View(movie);
         }
 
         // GET: MoviesController/Create
