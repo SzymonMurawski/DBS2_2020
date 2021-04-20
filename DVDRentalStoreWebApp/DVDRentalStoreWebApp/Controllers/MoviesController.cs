@@ -40,11 +40,10 @@ namespace DVDRentalStoreWebApp.Controllers
         // POST: MoviesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm]Movie movie)
         {
             try
             {
-                var movie = new Movie(int.Parse(collection["Id"]), collection["Title"], int.Parse(collection["Year"]), double.Parse(collection["Price"]));
                 Movies.Add(movie);
                 return RedirectToAction(nameof(Index));
             }
