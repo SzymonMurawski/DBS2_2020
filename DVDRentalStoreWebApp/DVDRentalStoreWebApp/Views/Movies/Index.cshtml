@@ -25,6 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+               Number of copies
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,6 +45,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @{ 
+                    int count = item.Copies != null ? item.Copies.Count : 0;
+                    @count
+                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
