@@ -19,9 +19,22 @@ namespace DVDRentalStoreWebApp.Controllers
             new Movie(5, "The Lord of the Rings", 1997, 82, new List<Copy> { new Copy(1, true, 1) }),
         };
         // GET: MoviesController
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(Movies);
+            IEnumerable<Movie> movies = Movies;
+            ViewBag.NextSortOrder = sortOrder == null || sortOrder == "descending" ? "ascending" : "descending";
+            switch (sortOrder)
+            {
+                case "descending":
+                    movies = movies.OrderByDescending(m => m.Title);
+                    break;
+                case "ascending":
+                    movies = movies.OrderBy(m => m.Title);
+                    break;
+                default:
+                    break;
+            }
+            return View(movies);
         }
 
         // GET: MoviesController/Details/5
