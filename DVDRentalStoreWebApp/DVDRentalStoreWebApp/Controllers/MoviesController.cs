@@ -44,6 +44,8 @@ namespace DVDRentalStoreWebApp.Controllers
         {
             try
             {
+                var movie = new Movie(int.Parse(collection["Id"]), collection["Title"], int.Parse(collection["Year"]), double.Parse(collection["Price"]));
+                Movies.Add(movie);
                 return RedirectToAction(nameof(Index));
             }
             catch
