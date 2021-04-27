@@ -18,14 +18,6 @@ namespace DVDRentalStoreWebApp.Controllers
             _context = context;
         }
 
-        private static List<Movie> Movies = new List<Movie>
-        {
-            new Movie(1, "Anchorman", 2000, 12, new List<Copy> { new Copy(1, true, 1), new Copy(2, true, 1), new Copy(3, false, 1) }),
-            new Movie(2, "Anchorman 2", 2001, 7),
-            new Movie(3, "Terminator", 1993, 22, new List<Copy> { new Copy(1, true, 1), new Copy(2, true, 1) }),
-            new Movie(4, "Jurrasic Park", 1999, 29),
-            new Movie(5, "The Lord of the Rings", 1997, 82, new List<Copy> { new Copy(1, true, 1) }),
-        };
         // GET: MoviesController
         public ActionResult Index(string sortOrder)
         {
