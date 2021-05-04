@@ -16,6 +16,10 @@ namespace DVDRentalStoreWebApp.DAL
         public DbSet<Employee> Employees { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Client>().ToTable("Clients");
+            modelBuilder.Entity<Employee>().ToTable("Employees");
+
+
             modelBuilder.Entity<Client>().HasData(
                 new Client { Id = 2, FirstName = "Bob", LastName = "Belcher", 
                     Birthday = DateTime.Parse("1977-01-23") },
