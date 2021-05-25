@@ -1,5 +1,6 @@
 ﻿using DVDRentalStoreWebApp.DAL;
 using DVDRentalStoreWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace DVDRentalStoreWebApp.Controllers
         }
 
         // GET: MoviesController
+        
         public ActionResult Index(string sortOrder)
         {
             IEnumerable<Movie> movies = _context.Movies.Include(m => m.Copies);
@@ -45,6 +47,7 @@ namespace DVDRentalStoreWebApp.Controllers
         }
 
         // GET: MoviesController/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -53,6 +56,7 @@ namespace DVDRentalStoreWebApp.Controllers
         // POST: MoviesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([FromForm]Movie movie)
         {
             try
@@ -68,6 +72,7 @@ namespace DVDRentalStoreWebApp.Controllers
         }
 
         // GET: MoviesController/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             Movie movie = _context.Movies.First(m => m.Id == id);
@@ -75,6 +80,7 @@ namespace DVDRentalStoreWebApp.Controllers
         }
 
         // POST: MoviesController/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, [FromForm]Movie movie)
@@ -96,6 +102,7 @@ namespace DVDRentalStoreWebApp.Controllers
         }
 
         // GET: MoviesController/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             Movie movie = _context.Movies.First(m => m.Id == id);
@@ -105,6 +112,7 @@ namespace DVDRentalStoreWebApp.Controllers
         // POST: MoviesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             Movie movie = _context.Movies.First(m => m.Id == id);
