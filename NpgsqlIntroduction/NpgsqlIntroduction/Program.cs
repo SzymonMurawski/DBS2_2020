@@ -13,6 +13,7 @@ namespace NpgsqlIntroduction
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connection_string))
             {
+                conn.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand("SELECT title, price, movie_id FROM movies WHERE year = @year", conn))
                 {
                     cmd.Parameters.AddWithValue("@year", int.Parse(year));
@@ -28,12 +29,14 @@ namespace NpgsqlIntroduction
             int new_id;
             using (NpgsqlConnection conn = new NpgsqlConnection(connection_string))
             {
+                conn.Open();
                 var cmd = new NpgsqlCommand("SELECT MAX(movie_id)+1 FROM movies", conn);
                 new_id = (int)cmd.ExecuteScalar();
             }
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connection_string))
-            { 
+            {
+                conn.Open();
                 Console.WriteLine("Title of new movie: ");
                 string title = Console.ReadLine();
                 Console.WriteLine("Year of new movie: ");
